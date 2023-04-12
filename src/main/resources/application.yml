@@ -1,0 +1,5 @@
+server:
+  port : 8081
+
+libraryWsUrl:
+  http://localhost:8080/datarest/
