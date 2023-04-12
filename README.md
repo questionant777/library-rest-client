@@ -3,3 +3,4 @@
 Репозиторий rest сервера
   https://github.com/questionant777/actuator-data-rest
   
+Работа между сервисами производится по контракту spring-data-rest.
