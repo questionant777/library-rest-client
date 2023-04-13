@@ -1,15 +1,11 @@
 package ru.otus.spring.service.rest;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+@AllArgsConstructor
 public class ObjRestTemplate<T> extends RestTemplate {
-
-    final Class<T> typeParameterClass;
-
-    public ObjRestTemplate(Class<T> typeParameterClass) {
-        this.typeParameterClass = typeParameterClass;
-    }
 
     public String saveObj(T obj, String url) {
 

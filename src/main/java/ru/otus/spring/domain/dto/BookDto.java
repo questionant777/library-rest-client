@@ -18,4 +18,6 @@ public class BookDto {
 
     private String genre;
 
+    private List<String> bookCommentList;
+
 }

@@ -3,6 +3,7 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.dto.AuthorDto;
+import ru.otus.spring.domain.dto.BookCommentDto;
 import ru.otus.spring.domain.dto.BookDto;
 import ru.otus.spring.domain.dto.GenreDto;
 import ru.otus.spring.service.rest.ObjRestTemplate;
@@ -15,31 +16,43 @@ public class FillBookServiceImpl implements FillBookService {
         this.libraryWsUrl = libraryWsUrl;
     }
 
-    public String insertAnyBook() {
-        GenreDto genreDto = new GenreDto(null, "genre1712");
+    public String insertGenre(String name) {
+        GenreDto genreDto = new GenreDto(null, name);
 
-        ObjRestTemplate<GenreDto> genreTemplate = new ObjRestTemplate<>(GenreDto.class);
+        ObjRestTemplate<GenreDto> genreTemplate = new ObjRestTemplate<>();
 
-        String respGenre = genreTemplate.saveObj(genreDto,
+        return genreTemplate.saveObj(genreDto,
                 libraryWsUrl + "genres/");
+    }
 
-        AuthorDto authorDto = new AuthorDto(null, "author1712");
+    public String insertAuthor(String name) {
+        AuthorDto authorDto = new AuthorDto(null, name);
 
-        ObjRestTemplate<AuthorDto> authorTemplate = new ObjRestTemplate<>(AuthorDto.class);
+        ObjRestTemplate<AuthorDto> authorTemplate = new ObjRestTemplate<>();
 
-        String respAuthor = authorTemplate.saveObj(authorDto,
+        return authorTemplate.saveObj(authorDto,
                 libraryWsUrl + "authors/");
+    }
 
+    public String insertBook(String name, String authorLocation, String genreLocation) {
         BookDto bookDto = new BookDto(null,
-                "book1712",
-                respAuthor,
-                respGenre);
+                name,
+                authorLocation,
+                genreLocation,
+                null);
 
-        ObjRestTemplate<BookDto> bookTemplate = new ObjRestTemplate<>(BookDto.class);
+        ObjRestTemplate<BookDto> bookTemplate = new ObjRestTemplate<>();
 
-        String respBook = bookTemplate.saveObj(bookDto,
+        return bookTemplate.saveObj(bookDto,
                 libraryWsUrl + "books/");
+    }
 
-        return respBook;
+    public String insertBookComment(String comment, String bookLocation) {
+        BookCommentDto bookCommentDto = new BookCommentDto(null, comment, bookLocation);
+
+        ObjRestTemplate<BookCommentDto> genreTemplate = new ObjRestTemplate<>();
+
+        return genreTemplate.saveObj(bookCommentDto,
+                libraryWsUrl + "bookComments/");
     }
 }
