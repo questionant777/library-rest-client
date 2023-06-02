@@ -1,5 +1,16 @@
 server:
-  port : 8081
+  port : 8082
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      slidingWindowType: TIME_BASED
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 25
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+      minimumNumberOfCalls: 1
 
 libraryWsUrl:
-  http://localhost:8080/datarest/
+  http://127.0.0.1:8080/datarest/
